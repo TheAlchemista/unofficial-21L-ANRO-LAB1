@@ -15,4 +15,3 @@ ros2 run turtlesim turtlesim_node
 ```
 ros2 run turtle_manipulation move --ros-args --params-file config/params.yaml
 ```
-
