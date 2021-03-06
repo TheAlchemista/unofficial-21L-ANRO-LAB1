@@ -4,10 +4,12 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription(
         [
+            # Launches turtle that will be controlled
             Node(
                 package='turtlesim',
                 executable='turtlesim_node'
             ),
+            # Launches turtle manipulation programm in a new terminal
             Node(
                 package='turtle_manipulation',
                 executable='move',
