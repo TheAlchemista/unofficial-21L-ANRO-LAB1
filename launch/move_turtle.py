@@ -11,6 +11,8 @@ def generate_launch_description():
             Node(
                 package='turtle_manipulation',
                 executable='move',
+                prefix=["gnome-terminal ", "-- "],
+                output='screen',
                 parameters=["./config/params.yaml"]
             )
         ]
