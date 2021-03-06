@@ -16,14 +16,13 @@ from turtle_manipulation import GetSpeed
 
 
 class Move(Node):
-    def __init__(self, get_speed):
+    def __init__(self):
         super().__init__('Move')
 
         self.turtle = '/turtle1'
         self.topic = '/cmd_vel'
         self.params = {}
 
-        self.get_speed = get_speed
         # Create publisher
         self.publisher_ = self.create_publisher(Twist, self.turtle + self.topic, 10)
         # Declare parameters
@@ -34,12 +33,13 @@ class Move(Node):
             ('left', 'l')
         ])
         self.intialise_params()
+        self.get_speed = GetSpeed.GetSpeed(self.params)
 
     def publish(self):
         break_loop = self.get_speed.filter_and_set_keys(self.params)
-        # Prints current speed
+        # Prints current speed on screen
         self.get_speed.print_speed(self.get_speed.getSpeed())
-
+        # Publisches the speed
         self.publisher_.publish(self.get_speed.getSpeed())
         return break_loop
 
@@ -62,8 +62,7 @@ class Move(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    get_speed = GetSpeed.GetSpeed()
-    move = Move(get_speed)
+    move = Move()
     move.run()
 
     # ROS2 node launch

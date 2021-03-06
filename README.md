@@ -3,9 +3,8 @@ ANRO 2021L first laboratory exercise.
 
 ## How to use:
 ### Using launch file:
-While being in project directory:
 ```
-ros2 launch ./launch/move_turtle.py 
+ros2 launch turtle_manipulation move_turtle.py
 ```
 ### Launch turtlesim trtlesim_node beforehand:
 ```

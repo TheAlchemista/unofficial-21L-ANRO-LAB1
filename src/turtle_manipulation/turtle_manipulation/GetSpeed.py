@@ -13,17 +13,18 @@ from turtle_manipulation.Constants import Constants
 
 class GetSpeed:
 
-    def __init__(self):
+    def __init__(self, params):
         self.speed = Twist()
         self.constants = Constants()
         self.screen = curses.initscr()
-        self.setup()
+        self.setup(params)
 
-    def setup(self):
+    def setup(self, params):
         curses.cbreak()
         curses.noecho()
         self.screen.keypad(1)
         self.screen.addstr(0, 100, "Hit 'q' to quit")
+        self.print_steering_info(params)
         self.screen.refresh()
 
     def filter_and_set_keys(self, params):
@@ -48,10 +49,6 @@ class GetSpeed:
 
         return break_loop
 
-    def print_string(self, string):
-        self.screen.addstr(string)
-        self.screen.refresh()
-
     def print_speed(self, speed):
         self.screen.addstr(0, 0, "Speed value:")
         self.screen.addstr(1, 1, "Linear:")
@@ -64,9 +61,20 @@ class GetSpeed:
         self.screen.addstr(8, 4, "z = " + str(speed.angular.z))
         self.screen.refresh()
 
+    def print_steering_info(self, params):
+        X_LAYOUT = 50
+        self.screen.addstr(0, X_LAYOUT, "Steering keys:")
+        self.screen.addstr(1, X_LAYOUT, "Up:" + params['up'])
+        self.screen.addstr(2, X_LAYOUT, "Down:" + params['down'])
+        self.screen.addstr(3, X_LAYOUT, "Left:" + params['left'])
+        self.screen.addstr(4, X_LAYOUT, "Right:" + params['right'])
+        self.screen.refresh()
+
+    # Closes curses
     def end(self):
         curses.endwin()
 
+    # Resets the speed. Otherwise turtle would never stop
     def reset_speed(self):
         self.speed.linear.x = 0.0
         self.speed.linear.y = 0.0
@@ -75,5 +83,6 @@ class GetSpeed:
         self.speed.angular.y = 0.0
         self.speed.angular.z = 0.0
 
+    # Getter
     def getSpeed(self):
         return self.speed
