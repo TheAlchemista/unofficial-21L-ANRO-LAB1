@@ -1,3 +1,7 @@
+# Launch file for turtle_manipulation package.
+# Launches turtle and a new terminal with a program to control it.
+
+
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
