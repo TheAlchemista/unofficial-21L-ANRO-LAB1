@@ -1,40 +1,9 @@
 
 <robot name="r2d2">
 
-<!-- <link name="axis">
-  <inertial>
-    <mass value="1"/>
-    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
-    <origin/>
-  </inertial>
-  <visual>
-    <origin xyz="0 0 0" rpy="1.57 0 0" />
-    <geometry>
-      <cylinder radius="0.01" length="0.5" />
-    </geometry>
-    <material name="gray">
-      <color rgba="0.2 0.2 0.2 1" />
-    </material>
-  </visual>
-
-  <collision>
-    <origin xyz="0 0 0" rpy="1.57 0 0" />
-    <geometry>
-      <cylinder radius="0.01" length="0.5" />
-    </geometry>
-    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
-  </collision>
-</link> -->
-
 <link name="body">
-  <inertial>
-    <mass value="1"/>
-    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
-    <origin/>
-  </inertial>
-
   <visual>
-    <origin xyz="0 0 -0.2" />
+    <origin xyz="0 0 0.3" />
     <geometry>
       <cylinder radius="0.20" length="0.6"/>
     </geometry>
@@ -44,7 +13,75 @@
   </visual>
 
   <collision>
-    <origin xyz="0 0 0.2" />
+    <origin xyz="0 0 0.0" />
+    <geometry>
+      <cylinder radius="0.20" length="0.6"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="long" type="prismatic">
+  <parent link="body"/>
+  <child link="body2"/>
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <axis xyz="0 0 1" />
+  <limit upper="0" lower="0.0" effort="10" velocity="10" />
+</joint>
+
+<link name="body2">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+
+  <visual>
+    <origin xyz="0 0 0.7" />
+    <geometry>
+      <cylinder radius="0.20" length="0.6"/>
+    </geometry>
+    <material name="white">
+      <color rgba="1 1 1 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0.0" />
+    <geometry>
+      <cylinder radius="0.20" length="0.6"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="longer" type="revolute">
+  <parent link="body2"/>
+  <child link="body3"/>
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <axis xyz="0 0 1" />
+  <limit upper="0" lower="0.0" effort="10" velocity="10" />
+</joint>
+
+<link name="body3">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+
+  <visual>
+    <origin xyz="0.7 0 0.7" />
+    <geometry>
+      <sphere radius="0.20"/>
+    </geometry>
+    <material name="white">
+      <color rgba="1 1 1 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0.0" />
     <geometry>
       <cylinder radius="0.20" length="0.6"/>
     </geometry>

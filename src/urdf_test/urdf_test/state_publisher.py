@@ -28,7 +28,7 @@ class StatePublisher(Node):
       swivel = 0.
       angle = 0.
       height = 0.
-      hinc = 0.005
+      hinc = 0.02
 
       # message declarations
       odom_trans = TransformStamped()
@@ -43,7 +43,7 @@ class StatePublisher(Node):
               # update joint_state
               now = self.get_clock().now()
               joint_state.header.stamp = now.to_msg()
-              joint_state.name = ['swivel', 'tilt', 'periscope']
+              joint_state.name = ['swivel', 'long', 'longer']
               joint_state.position = [swivel, tilt, height]
 
               # update transform
@@ -51,9 +51,9 @@ class StatePublisher(Node):
               odom_trans.header.stamp = now.to_msg()
               odom_trans.transform.translation.x = cos(angle)*0
               odom_trans.transform.translation.y = sin(angle)*0
-              odom_trans.transform.translation.z = 0.7
+              odom_trans.transform.translation.z = 0.3
               odom_trans.transform.rotation = \
-                  euler_to_quaternion(angle*5, 0, angle + pi/2) # roll,pitch,yaw
+                  euler_to_quaternion(angle*0, 0, (angle + pi/2)*0) # roll,pitch,yaw
 
               # send the joint state and transform
               self.joint_pub.publish(joint_state)
@@ -61,11 +61,12 @@ class StatePublisher(Node):
 
               # Create new robot state
               tilt += tinc
-              if tilt < -0.5 or tilt > 0.0:
+              if tilt < 0.0 or tilt > 2.0:
                   tinc *= -1
-              height += hinc
-              if height > 0.2 or height < 0.0:
-                  hinc *= -1
+
+              height += 0.2
+              # if height > 0.0 or height < 5.0:
+              #     hinc *= -1
               swivel += degree
               angle += degree/4
 
