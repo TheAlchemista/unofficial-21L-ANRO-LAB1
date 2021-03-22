@@ -58,6 +58,8 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        base:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -65,10 +67,11 @@ Visualization Manager:
       Show Names: false
       Tree:
         base_link:
-          body:
-            body2:
-              body3:
-                {}
+          base:
+            body:
+              body2:
+                body3:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -94,17 +97,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        body:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         body2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         body3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base:
           Alpha: 1
           Show Axes: false
           Show Trail: false
